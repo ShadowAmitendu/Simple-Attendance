@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Simple Attendance</string>
+    <string name="import_csv">Import CSV</string>
+    <string name="export_pdf">Export PDF</string>
+    <string name="export_attendance_as_pdf">Export Attendance as PDF</string>
+    <string name="absent">Absent</string>
+    <string name="present">Present</string>
+    <string name="addcsv">addCSV</string>
+    <string name="attendance_date">Attendance Date</string>
+    <string name="students_list">Students</string>
+    <string name="no_students_found">No students found</string>
+    <string name="import_csv_to_get_started">Import a CSV file to get started with attendance tracking</string>
+    <string name="export_attendance">Export PDF</string>
+    <string name="date_icon">Date</string>
+</resources>

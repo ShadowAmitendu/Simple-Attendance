@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Update your menu/top_app_bar_menu.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_add_student"
+        android:title="Add Student"
+        android:icon="@drawable/baseline_person_add_24"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_reset_attendance"
+        android:title="Reset Attendance"
+        android:icon="@drawable/baseline_refresh_24"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_clear_data"
+        android:title="Clear All Data"
+        android:icon="@drawable/baseline_warning_24"
+        app:showAsAction="never" />
+
+</menu>
