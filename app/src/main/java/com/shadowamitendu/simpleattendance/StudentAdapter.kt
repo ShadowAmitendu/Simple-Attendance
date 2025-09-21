@@ -48,16 +48,23 @@ class StudentAdapter(
             when (student.isPresent) {
                 true -> {
                     // Present state - Green theme
-                    holder.btnPresent.backgroundTintList = ContextCompat.getColorStateList(context, android.R.color.holo_green_light)
-                    holder.btnAbsent.backgroundTintList = ContextCompat.getColorStateList(context, android.R.color.darker_gray)
-                    holder.cardView.strokeColor = ContextCompat.getColor(context, android.R.color.holo_green_light)
+                    holder.btnPresent.backgroundTintList =
+                        ContextCompat.getColorStateList(context, android.R.color.holo_green_light)
+                    holder.btnAbsent.backgroundTintList =
+                        ContextCompat.getColorStateList(context, android.R.color.darker_gray)
+                    holder.cardView.strokeColor =
+                        ContextCompat.getColor(context, android.R.color.holo_green_light)
                     holder.cardView.strokeWidth = 2
                 }
+
                 false -> {
                     // Absent state - Red theme
-                    holder.btnAbsent.backgroundTintList = ContextCompat.getColorStateList(context, android.R.color.holo_red_light)
-                    holder.btnPresent.backgroundTintList = ContextCompat.getColorStateList(context, android.R.color.darker_gray)
-                    holder.cardView.strokeColor = ContextCompat.getColor(context, android.R.color.holo_red_light)
+                    holder.btnAbsent.backgroundTintList =
+                        ContextCompat.getColorStateList(context, android.R.color.holo_red_light)
+                    holder.btnPresent.backgroundTintList =
+                        ContextCompat.getColorStateList(context, android.R.color.darker_gray)
+                    holder.cardView.strokeColor =
+                        ContextCompat.getColor(context, android.R.color.holo_red_light)
                     holder.cardView.strokeWidth = 2
                 }
             }

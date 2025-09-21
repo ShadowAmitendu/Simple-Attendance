@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Create this file as layout/dialog_add_student.xml -->
+<?xml version="1.0" encoding="utf-8"?><!-- Create this file as layout/dialog_add_student.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -9,16 +8,16 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilRoll"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:hint="Roll Number"
         app:boxBackgroundMode="outline"
-        app:boxCornerRadiusTopStart="12dp"
-        app:boxCornerRadiusTopEnd="12dp"
-        app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusBottomEnd="12dp"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etRoll"
@@ -31,15 +30,15 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilName"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Student Name"
         app:boxBackgroundMode="outline"
-        app:boxCornerRadiusTopStart="12dp"
-        app:boxCornerRadiusTopEnd="12dp"
-        app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusBottomEnd="12dp"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etName"

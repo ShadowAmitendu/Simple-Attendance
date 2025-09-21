@@ -20,6 +20,8 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
+import androidx.core.view.size
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
@@ -39,8 +41,6 @@ import java.io.InputStreamReader
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import androidx.core.view.size
-import androidx.core.net.toUri
 
 class MainActivity : AppCompatActivity() {
 
@@ -120,16 +120,19 @@ class MainActivity : AppCompatActivity() {
                 showAddStudentDialog()
                 true
             }
+
             R.id.action_clear_data -> {
                 Log.d("MENU_CLICK", "Clear Data clicked")
                 showClearDataDialog()
                 true
             }
+
             R.id.action_reset_attendance -> {
                 Log.d("MENU_CLICK", "Reset Attendance clicked")
                 showResetAttendanceDialog()
                 true
             }
+
             else -> {
                 Log.d("MENU_CLICK", "Unknown menu item: ${item.itemId}")
                 super.onOptionsItemSelected(item)
@@ -139,7 +142,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViews() {
         // Set up toolbar first
-        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.topAppBar)
+        val toolbar =
+            findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.topAppBar)
         setSupportActionBar(toolbar)
 
         rvStudents = findViewById(R.id.rvStudents)
@@ -255,11 +259,19 @@ class MainActivity : AppCompatActivity() {
 
                 runOnUiThread {
                     updateUI()
-                    Toast.makeText(this@MainActivity, "Student added successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Student added successfully",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             } catch (e: Exception) {
                 runOnUiThread {
-                    Toast.makeText(this@MainActivity, "Failed to add student: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Failed to add student: ${e.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }
@@ -285,11 +297,19 @@ class MainActivity : AppCompatActivity() {
 
                 runOnUiThread {
                     updateUI()
-                    Toast.makeText(this@MainActivity, "All data cleared successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        "All data cleared successfully",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             } catch (e: Exception) {
                 runOnUiThread {
-                    Toast.makeText(this@MainActivity, "Failed to clear data: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Failed to clear data: ${e.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }
@@ -318,11 +338,19 @@ class MainActivity : AppCompatActivity() {
 
                 runOnUiThread {
                     adapter.notifyDataSetChanged()
-                    Toast.makeText(this@MainActivity, "Attendance reset successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Attendance reset successfully",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             } catch (e: Exception) {
                 runOnUiThread {
-                    Toast.makeText(this@MainActivity, "Failed to reset attendance: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Failed to reset attendance: ${e.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }
@@ -370,30 +398,52 @@ class MainActivity : AppCompatActivity() {
         when {
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> {
                 // Android 13+ (API 33+)
-                if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_MEDIA_IMAGES)
-                    != PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        android.Manifest.permission.READ_MEDIA_IMAGES
+                    )
+                    != PackageManager.PERMISSION_GRANTED
+                ) {
                     permissions.add(android.Manifest.permission.READ_MEDIA_IMAGES)
                 }
-                if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)
-                    != PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        android.Manifest.permission.POST_NOTIFICATIONS
+                    )
+                    != PackageManager.PERMISSION_GRANTED
+                ) {
                     permissions.add(android.Manifest.permission.POST_NOTIFICATIONS)
                 }
             }
+
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> {
                 // Android 11-12 (API 30-32)
-                if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        android.Manifest.permission.READ_EXTERNAL_STORAGE
+                    )
+                    != PackageManager.PERMISSION_GRANTED
+                ) {
                     permissions.add(android.Manifest.permission.READ_EXTERNAL_STORAGE)
                 }
             }
+
             else -> {
                 // Android 6-10 (API 23-29)
-                if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        android.Manifest.permission.READ_EXTERNAL_STORAGE
+                    )
+                    != PackageManager.PERMISSION_GRANTED
+                ) {
                     permissions.add(android.Manifest.permission.READ_EXTERNAL_STORAGE)
                 }
-                if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    )
+                    != PackageManager.PERMISSION_GRANTED
+                ) {
                     permissions.add(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 }
             }
@@ -401,7 +451,11 @@ class MainActivity : AppCompatActivity() {
 
         // Request runtime permissions if needed
         if (permissions.isNotEmpty()) {
-            ActivityCompat.requestPermissions(this, permissions.toTypedArray(), PERMISSION_REQUEST_CODE)
+            ActivityCompat.requestPermissions(
+                this,
+                permissions.toTypedArray(),
+                PERMISSION_REQUEST_CODE
+            )
         }
 
         // Handle MANAGE_EXTERNAL_STORAGE for Android 11+ (separate from runtime permissions)
@@ -427,7 +481,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             .setNegativeButton("Cancel") { _, _ ->
-                Toast.makeText(this, "Storage permission is required for PDF export", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this,
+                    "Storage permission is required for PDF export",
+                    Toast.LENGTH_LONG
+                ).show()
             }
             .setCancelable(false)
             .show()
@@ -438,8 +496,10 @@ class MainActivity : AppCompatActivity() {
             deniedPermissions.contains(android.Manifest.permission.READ_EXTERNAL_STORAGE) ||
                     deniedPermissions.contains(android.Manifest.permission.READ_MEDIA_IMAGES) ->
                 "Storage permissions are required to import CSV files and export PDF reports."
+
             deniedPermissions.contains(android.Manifest.permission.POST_NOTIFICATIONS) ->
                 "Notification permission helps you stay updated about export progress."
+
             else -> "These permissions are required for the app to function properly."
         }
 
@@ -454,7 +514,11 @@ class MainActivity : AppCompatActivity() {
                 )
             }
             .setNegativeButton("Cancel") { _, _ ->
-                Toast.makeText(this, "Some features may not work without permissions", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this,
+                    "Some features may not work without permissions",
+                    Toast.LENGTH_LONG
+                ).show()
             }
             .show()
     }
@@ -530,7 +594,9 @@ class MainActivity : AppCompatActivity() {
 
                     // Skip empty lines and header (first line if it contains "roll" or "name")
                     if (line.trim().isEmpty() ||
-                        (lineNumber == 1 && (line.lowercase().contains("roll") || line.lowercase().contains("name")))) {
+                        (lineNumber == 1 && (line.lowercase().contains("roll") || line.lowercase()
+                            .contains("name")))
+                    ) {
                         return@forEach
                     }
 

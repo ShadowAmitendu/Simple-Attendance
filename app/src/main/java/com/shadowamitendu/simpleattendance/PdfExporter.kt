@@ -1,17 +1,27 @@
 package com.shadowamitendu.simpleattendance
 
 import android.app.Activity
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.RectF
+import android.graphics.Typeface
 import android.graphics.pdf.PdfDocument
 import android.net.Uri
 import androidx.core.graphics.toColorInt
 import com.shadowamitendu.simpleattendance.data.StudentEntity
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 class PdfExporter {
 
-    fun exportAttendanceToUri(activity: Activity, students: List<StudentEntity>, uri: Uri, date: String) {
+    fun exportAttendanceToUri(
+        activity: Activity,
+        students: List<StudentEntity>,
+        uri: Uri,
+        date: String
+    ) {
         val outputStream = activity.contentResolver.openOutputStream(uri)
             ?: throw Exception("Unable to open file for writing")
 
@@ -42,7 +52,7 @@ class PdfExporter {
             isAntiAlias = true
         }
 
-        val paintHeader = Paint().apply {
+        Paint().apply {
             textSize = 12f
             color = Color.WHITE
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
@@ -92,7 +102,8 @@ class PdfExporter {
 
             // Date and generation info
             canvas.drawText("Date: $date", 50f, y + 10f, paintSubtitle)
-            val currentTime = SimpleDateFormat("MMM dd, yyyy 'at' HH:mm", Locale.getDefault()).format(Date())
+            val currentTime =
+                SimpleDateFormat("MMM dd, yyyy 'at' HH:mm", Locale.getDefault()).format(Date())
             canvas.drawText("Generated: $currentTime", 50f, y + 25f, paintSubtitle)
 
             y = 120
@@ -101,7 +112,8 @@ class PdfExporter {
             if (pageNum == 1) {
                 val presentCount = students.count { it.isPresent }
                 val absentCount = students.size - presentCount
-                val attendanceRate = if (students.isNotEmpty()) (presentCount * 100f / students.size) else 0f
+                val attendanceRate =
+                    if (students.isNotEmpty()) (presentCount * 100f / students.size) else 0f
 
                 val statsRect = RectF(30f, y.toFloat(), pageWidth - 30f, y + 60f)
                 val statsPaint = Paint().apply {
@@ -142,7 +154,12 @@ class PdfExporter {
                 canvas.drawText("Total Students: ${students.size}", 50f, y + 40f, paintStats)
                 canvas.drawText("Present: $presentCount", 160f, y + 40f, statsPaintGreen)
                 canvas.drawText("Absent: $absentCount", 250f, y + 40f, statsPaintRed)
-                canvas.drawText("Attendance Rate: ${String.format("%.1f", attendanceRate)}%", 330f, y + 40f, paintStats)
+                canvas.drawText(
+                    "Attendance Rate: ${String.format("%.1f", attendanceRate)}%",
+                    330f,
+                    y + 40f,
+                    paintStats
+                )
 
                 y += 80
             }
@@ -181,7 +198,8 @@ class PdfExporter {
         var canvas = page.canvas
 
         drawPageHeader(canvas, pageNumber)
-        var y = if (pageNumber == 1) 240 else 190 // Added extra space for first page, adjusted for subsequent pages
+        var y =
+            if (pageNumber == 1) 240 else 190 // Added extra space for first page, adjusted for subsequent pages
         var serialNumber = 1
 
         for (student in students) {
@@ -257,7 +275,11 @@ class PdfExporter {
     }
 
     // Fallback method for direct file saving
-    fun exportAttendance(context: android.content.Context, students: List<StudentEntity>, date: String) {
+    fun exportAttendance(
+        context: android.content.Context,
+        students: List<StudentEntity>,
+        date: String
+    ) {
         val file = java.io.File(context.getExternalFilesDir(null), "Attendance_$date.pdf")
 
         try {
@@ -288,7 +310,12 @@ class PdfExporter {
             canvas.drawText("Attendance - $date", 50f, y.toFloat(), paintTitle)
             y += 40
 
-            canvas.drawText("S.No.  Roll No.       Student Name                    Status", 50f, y.toFloat(), paintText)
+            canvas.drawText(
+                "S.No.  Roll No.       Student Name                    Status",
+                50f,
+                y.toFloat(),
+                paintText
+            )
             y += 30
 
             var serialNumber = 1
@@ -296,7 +323,8 @@ class PdfExporter {
                 if (y > pageHeight - 50) break // Simple page overflow handling
 
                 val status = if (student.isPresent) "Present" else "Absent"
-                val line = "${serialNumber}.     ${student.roll}       ${student.name}       $status"
+                val line =
+                    "${serialNumber}.     ${student.roll}       ${student.name}       $status"
                 canvas.drawText(line, 50f, y.toFloat(), paintText)
                 y += 20
                 serialNumber++
@@ -307,10 +335,18 @@ class PdfExporter {
             pdfDocument.close()
             outputStream.close()
 
-            android.widget.Toast.makeText(context, "PDF saved: ${file.absolutePath}", android.widget.Toast.LENGTH_LONG).show()
+            android.widget.Toast.makeText(
+                context,
+                "PDF saved: ${file.absolutePath}",
+                android.widget.Toast.LENGTH_LONG
+            ).show()
 
         } catch (e: Exception) {
-            android.widget.Toast.makeText(context, "Error saving PDF: ${e.message}", android.widget.Toast.LENGTH_LONG).show()
+            android.widget.Toast.makeText(
+                context,
+                "Error saving PDF: ${e.message}",
+                android.widget.Toast.LENGTH_LONG
+            ).show()
         }
     }
 }

@@ -5,22 +5,28 @@
     <!-- Storage permissions for different Android versions -->
 
     <!-- For Android 6-9 (API 23-28) -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="29"
         tools:ignore="ScopedStorage" />
 
     <!-- For Android 11+ (API 30+) - All files access for PDF export -->
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
 
     <!-- For Android 13+ (API 33+) - Granular media permissions -->
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"
+    <uses-permission
+        android:name="android.permission.READ_MEDIA_IMAGES"
         android:minSdkVersion="33" />
-    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"
+    <uses-permission
+        android:name="android.permission.READ_MEDIA_VIDEO"
         android:minSdkVersion="33" />
-    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO"
+    <uses-permission
+        android:name="android.permission.READ_MEDIA_AUDIO"
         android:minSdkVersion="33" />
 
     <!-- Network permissions (if you plan to add cloud features) -->
@@ -31,7 +37,8 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <!-- Notification permissions for Android 13+ -->
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"
+    <uses-permission
+        android:name="android.permission.POST_NOTIFICATIONS"
         android:minSdkVersion="33" />
 
     <application
@@ -40,10 +47,10 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SimpleAttendance"
-        android:requestLegacyExternalStorage="true"
         tools:targetApi="31">
 
         <activity
